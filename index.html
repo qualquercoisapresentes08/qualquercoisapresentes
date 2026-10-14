@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QualquerCoisa - Buscador Inteligente de Presentes por Perfil</title>
+  <meta name="description" content="Não sabe o que dar de presente? Responda 4 perguntas simples sobre quem vai receber e receba sugestões certeiras com os melhores preços na Amazon e Mercado Livre.">
+  <link rel="canonical" href="https://qualquercoisa.com.br/">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container nav-flex">
+      <a href="index.html" class="brand-logo">
+        <span class="brand-icon">🎁</span>
+        <span>Qualquer<strong>Coisa</strong></span>
+        <span class="brand-tag">IA Gift Finder</span>
+      </a>
+      <span style="font-size: 0.85rem; color: var(--slate-500); font-weight: 600;">100% Gratuito</span>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <section class="hero">
+      <h1>Nunca mais fique em dúvida sobre <span>o que dar de presente</span></h1>
+      <p>Conte um pouco sobre a pessoa e nosso algoritmo encontra a sugestão perfeita que cabe no seu bolso.</p>
+    </section>
+
+    <!-- Formulário Interativo por Características -->
+    <div class="finder-card">
+      
+      <!-- Passo 1: Relação / Parentesco -->
+      <div class="form-section">
+        <label class="step-label">1. Para quem é o presente?</label>
+        <div class="options-grid">
+          <button type="button" class="option-btn selected" data-group="relation" data-value="namorado">
+            <span class="opt-icon">❤️</span> Namorado(a)
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="mae">
+            <span class="opt-icon">🌸</span> Mãe
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="pai">
+            <span class="opt-icon">👔</span> Pai
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="amigo">
+            <span class="opt-icon">🤝</span> Amigo(a)
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="cunhado">
+            <span class="opt-icon">🍻</span> Cunhado(a)
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="irmao">
+            <span class="opt-icon">⚡</span> Irmão / Irmã
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="chefe">
+            <span class="opt-icon">💼</span> Chefe / Colega
+          </button>
+          <button type="button" class="option-btn" data-group="relation" data-value="sogro">
+            <span class="opt-icon">🏡</span> Sogro(a)
+          </button>
+        </div>
+      </div>
+
+      <!-- Passo 2: Faixa Etária -->
+      <div class="form-section">
+        <label class="step-label">2. Qual é a faixa etária da pessoa?</label>
+        <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
+          <button type="button" class="option-btn" data-group="age" data-value="jovem">
+            Jovem (12 a 17 anos)
+          </button>
+          <button type="button" class="option-btn selected" data-group="age" data-value="adulto">
+            Adulto (18 a 35 anos)
+          </button>
+          <button type="button" class="option-btn" data-group="age" data-value="meia-idade">
+            Adulto (36 a 55 anos)
+          </button>
+          <button type="button" class="option-btn" data-group="age" data-value="senior">
+            Sênior (56+ anos)
+          </button>
+        </div>
+      </div>
+
+      <!-- Passo 3: Orçamento Máximo -->
+      <div class="form-section">
+        <label class="step-label">3. Até quanto você quer gastar?</label>
+        <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+          <button type="button" class="option-btn" data-group="budget" data-value="50">
+            Até R$ 50
+          </button>
+          <button type="button" class="option-btn selected" data-group="budget" data-value="150">
+            Até R$ 150
+          </button>
+          <button type="button" class="option-btn" data-group="budget" data-value="300">
+            Até R$ 300
+          </button>
+          <button type="button" class="option-btn" data-group="budget" data-value="1000">
+            Sem Limite
+          </button>
+        </div>
+      </div>
+
+      <!-- Passo 4: Interesses e Hobbies (Multi-seleção) -->
+      <div class="form-section">
+        <label class="step-label">4. O que essa pessoa mais curte? (Escolha 1 ou mais)</label>
+        <div class="tags-cloud">
+          <span class="tag-pill" data-tag="churrasco">🥩 Churrasco</span>
+          <span class="tag-pill selected" data-tag="cafe">☕ Café Especial</span>
+          <span class="tag-pill selected" data-tag="tech">💻 Tecnologia & Gadgets</span>
+          <span class="tag-pill" data-tag="vinhos">🍷 Vinhos & Bar</span>
+          <span class="tag-pill" data-tag="livros">📚 Livros & Leitura</span>
+          <span class="tag-pill" data-tag="games">🎮 Games & Nerd</span>
+          <span class="tag-pill" data-tag="fitness">🏃 Fitness & Academia</span>
+          <span class="tag-pill" data-tag="skincare">💄 Skincare & Beleza</span>
+          <span class="tag-pill" data-tag="decoracao">🌿 Plantas & Casa</span>
+          <span class="tag-pill" data-tag="viagem">✈️ Viagens & Aventuras</span>
+          <span class="tag-pill" data-tag="cozinha">🍳 Cozinha Gourmet</span>
+        </div>
+      </div>
+
+      <!-- Passo 5: Detalhe Opcional -->
+      <div class="form-section">
+        <label class="step-label">5. Algum detalhe especial? (Opcional)</label>
+        <input type="text" id="customDetail" class="custom-input" placeholder="Ex: Gosta de coisas práticas, odeia estampas chamativas, etc.">
+      </div>
+
+      <button type="button" class="btn-generate" id="btnGenerate">
+        <span>✨ Encontrar o Presente Perfeito</span>
+      </button>
+
+    </div>
+
+    <!-- SEÇÃO DE RESULTADOS -->
+    <section class="results-section" id="resultsSection">
+      <div class="results-header">
+        <h2>Ideias Selecionadas para o seu Perfil</h2>
+        <p>Clique para comparar os melhores preços e avaliações diretamente nas lojas:</p>
+      </div>
+
+      <div class="cards-grid" id="giftCardsGrid">
+        <!-- Injetado dinamicamente via script.js -->
+      </div>
+
+      <div class="recalculate-bar">
+        <button type="button" class="btn-secondary" id="btnReset">
+          🔄 Mudar Perfil ou Refazer Busca
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-flex">
+        <div><strong>QualquerCoisa</strong> &copy; 2026. Feito para simplificar suas decisões.</div>
+        <div>
+          <span>Buscador Inteligente de Presentes</span>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        Aviso de transparência: Como participante do Programa de Associados da Amazon e do Mercado Livre, podemos receber uma pequena comissão por compras qualificadas geradas através de nossos links, sem nenhum custo extra para você.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
