@@ -276,8 +276,8 @@ body {
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
   margin-bottom: 30px;
 }
 
@@ -285,104 +285,194 @@ body {
   background: var(--white);
   border: 1px solid var(--slate-200);
   border-radius: var(--radius);
-  padding: 22px;
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   position: relative;
   overflow: hidden;
 }
 
 .gift-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: #c7d2fe;
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px -4px rgba(99, 102, 241, 0.15);
+  border-color: #a5b4fc;
 }
 
-.gift-category-tag {
-  display: inline-block;
-  background: var(--primary-light);
-  color: var(--primary);
-  font-size: 0.75rem;
+/* Container da Imagem do Card */
+.gift-card-media {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: #f1f5f9;
+}
+
+.gift-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gift-card:hover .gift-card-media img {
+  transform: scale(1.05);
+}
+
+.gift-badge-category {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.72rem;
   font-weight: 700;
-  padding: 3px 10px;
+  padding: 4px 10px;
   border-radius: 999px;
   text-transform: uppercase;
-  margin-bottom: 12px;
-  width: fit-content;
+  letter-spacing: 0.5px;
 }
 
-.gift-card h3 {
-  font-size: 1.25rem;
-  color: var(--slate-900);
-  margin-bottom: 6px;
+.gift-badge-price {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(22, 163, 74, 0.95);
+  color: #fff;
+  font-size: 0.82rem;
   font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.gift-price-estimate {
-  font-size: 0.95rem;
+/* Conteúdo interno do Card */
+.gift-card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gift-card-body h3 {
+  font-size: 1.15rem;
+  color: var(--slate-900);
+  margin-bottom: 8px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.gift-ai-tag {
+  font-size: 0.72rem;
+  color: #6366f1;
   font-weight: 700;
-  color: #16a34a;
-  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 8px;
 }
 
 .gift-reason-box {
   background: #f8fafc;
   border-left: 3px solid var(--primary);
   padding: 10px 12px;
-  border-radius: 0 6px 6px 0;
-  font-size: 0.88rem;
+  border-radius: 0 8px 8px 0;
+  font-size: 0.86rem;
   color: var(--slate-600);
-  margin-bottom: 18px;
-  line-height: 1.5;
+  margin-bottom: 16px;
+  line-height: 1.45;
+  margin-top: auto;
 }
 
-/* Affiliate Buttons */
+/* Área de Ações e Botões */
 .gift-actions {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-top: auto;
+  padding: 0 18px 18px;
 }
 
-.btn-amazon {
-  background-color: var(--amazon-orange);
-  color: #111827;
-  font-weight: 700;
-  font-size: 0.92rem;
-  padding: 11px 14px;
-  border-radius: var(--radius-sm);
+/* Botão Dominante Hero: Amazon Oficial */
+.btn-amazon-primary {
+  background: linear-gradient(180deg, #ffa41c 0%, #ff8f00 100%);
+  color: #0f1111;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 13px 14px;
+  border-radius: 10px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: background-color 0.2s;
+  box-shadow: 0 2px 5px rgba(213, 142, 7, 0.4);
+  transition: all 0.2s ease;
+  border: 1px solid #d58e07;
 }
 
-.btn-amazon:hover {
-  background-color: var(--amazon-hover);
+.btn-amazon-primary:hover {
+  background: linear-gradient(180deg, #ffb03a 0%, #fa8900 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(213, 142, 7, 0.5);
 }
 
-.btn-ml {
-  background-color: var(--ml-yellow);
-  color: var(--ml-text);
+.btn-prime-pill {
+  background: #002f36;
+  color: #00a8e1;
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* Linha Secundária: Mercado Livre + WhatsApp */
+.gift-secondary-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-ml-secondary {
+  flex: 1;
+  background: #fff;
+  color: #333;
+  border: 1.5px solid #ffe600;
   font-weight: 700;
-  font-size: 0.88rem;
-  padding: 9px 12px;
-  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  padding: 9px 10px;
+  border-radius: 8px;
   text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: opacity 0.2s;
+  gap: 4px;
+  transition: all 0.2s ease;
 }
 
-.btn-ml:hover {
-  opacity: 0.9;
+.btn-ml-secondary:hover {
+  background: #fffde6;
+  border-color: #ffd100;
+}
+
+.btn-whatsapp-share {
+  background: #25d366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 9px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.btn-whatsapp-share:hover {
+  background: #20ba59;
 }
 
 /* Reset / Recalculate */

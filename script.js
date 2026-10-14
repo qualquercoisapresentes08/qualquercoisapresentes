@@ -405,6 +405,49 @@ function generateRecommendationsLocal() {
   renderGiftCards(bestPicks, false);
 }
 
+function getGiftImage(gift) {
+  const text = `${gift.title} ${gift.category || ""} ${gift.searchQuery || ""} ${(gift.tags || []).join(" ")}`.toLowerCase();
+
+  if (text.includes("churrasco") || text.includes("carne") || text.includes("faca")) {
+    return "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("cafe") || text.includes("café") || text.includes("prensa") || text.includes("moedor") || text.includes("caneca") || text.includes("expresso")) {
+    return "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("fone") || text.includes("headphone") || text.includes("bluetooth") || text.includes("som") || text.includes("caixa") || text.includes("alexa") || text.includes("echo")) {
+    return "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("smartwatch") || text.includes("relogio") || text.includes("relógio") || text.includes("pulseira")) {
+    return "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("vinho") || text.includes("taca") || text.includes("taça") || text.includes("abridor") || text.includes("cerveja") || text.includes("bar")) {
+    return "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("livro") || text.includes("kindle") || text.includes("leitura")) {
+    return "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("game") || text.includes("gamer") || text.includes("console") || text.includes("mouse") || text.includes("teclado") || text.includes("nerd")) {
+    return "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("fitness") || text.includes("treino") || text.includes("academia") || text.includes("garrafa") || text.includes("esporte")) {
+    return "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("skincare") || text.includes("beleza") || text.includes("creme") || text.includes("perfume") || text.includes("maquiagem")) {
+    return "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("planta") || text.includes("decoracao") || text.includes("decoração") || text.includes("luminaria") || text.includes("luminária") || text.includes("difusor") || text.includes("vela")) {
+    return "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("cozinha") || text.includes("panela") || text.includes("airfryer") || text.includes("gourmet")) {
+    return "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80";
+  }
+  if (text.includes("viagem") || text.includes("mochila") || text.includes("mala")) {
+    return "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?auto=format&fit=crop&w=600&q=80";
+  }
+
+  return "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80";
+}
+
 function renderGiftCards(items, isAiGenerated = false) {
   const container = document.getElementById("giftCardsGrid");
   container.innerHTML = "";
@@ -414,18 +457,21 @@ function renderGiftCards(items, isAiGenerated = false) {
     const mlUrl = `https://lista.mercadolivre.com.br/${encodeURIComponent(gift.searchQuery)}`;
     const whatsAppMsg = `Olha essa ideia de presente que achei para você: *${gift.title}*! Dá uma olhada aqui: ${amazonUrl}`;
     const whatsAppUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsAppMsg)}`;
+    const imageUrl = getGiftImage(gift);
 
     const card = document.createElement("div");
     card.className = "gift-card";
 
     card.innerHTML = `
-      <div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <span class="gift-category-tag">${gift.category || "Presente Especial"}</span>
-          ${isAiGenerated ? '<span style="font-size: 0.72rem; color: #6366f1; font-weight: 700;">✨ Criado com IA</span>' : ""}
-        </div>
+      <div class="gift-card-media">
+        <img src="${imageUrl}" alt="${gift.title}" loading="lazy">
+        <span class="gift-badge-category">${gift.category || "Presente"}</span>
+        <span class="gift-badge-price">R$ ${gift.priceMin} - ${gift.priceMax}</span>
+      </div>
+
+      <div class="gift-card-body">
+        ${isAiGenerated ? '<div class="gift-ai-tag">✨ Sugestão Gerada por IA</div>' : ""}
         <h3>${gift.title}</h3>
-        <div class="gift-price-estimate">Aprox. R$ ${gift.priceMin} - R$ ${gift.priceMax}</div>
         <div class="gift-reason-box">
           <strong>Por que dar este presente:</strong><br>
           ${gift.reason}
@@ -433,18 +479,20 @@ function renderGiftCards(items, isAiGenerated = false) {
       </div>
 
       <div class="gift-actions">
-        <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="btn-amazon">
+        <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="btn-amazon-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
           </svg>
-          Ver Melhores Ofertas na Amazon
+          <span>Ver Oferta na Amazon</span>
+          <span class="btn-prime-pill">Prime</span>
         </a>
-        <div style="display: flex; gap: 8px;">
-          <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="btn-ml" style="flex: 1;">
-            Mercado Livre
+
+        <div class="gift-secondary-row">
+          <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="btn-ml-secondary">
+            <span>Ver no Mercado Livre</span>
           </a>
-          <a href="${whatsAppUrl}" target="_blank" rel="noopener noreferrer" class="btn-action-outline" style="padding: 8px 12px; background: #25d366; color: white; border-color: #25d366; text-decoration: none; font-size: 0.85rem; font-weight: 700; border-radius: 8px; display: flex; align-items: center; gap: 4px;" title="Compartilhar no WhatsApp">
-            💬 Enviar
+          <a href="${whatsAppUrl}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share" title="Mandar ideia no WhatsApp">
+            <span>💬 Enviar</span>
           </a>
         </div>
       </div>
