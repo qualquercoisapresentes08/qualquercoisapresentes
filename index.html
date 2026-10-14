@@ -6,6 +6,12 @@
   <title>QualquerCoisa - Buscador Inteligente de Presentes por Perfil</title>
   <meta name="description" content="Não sabe o que dar de presente? Responda 4 perguntas simples sobre quem vai receber e receba sugestões certeiras com os melhores preços na Amazon e Mercado Livre.">
   <link rel="canonical" href="https://qualquercoisa.com.br/">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="QCP Presentes">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/kits/kit-premium.jpg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -148,6 +154,27 @@
       </div>
     </section>
 
+    <!-- SEÇÃO DE KITS DE PRESENTES PRONTOS & MAIS DESEJADOS -->
+    <section class="featured-kits-section" id="featuredKitsSection">
+      <div class="kits-section-header">
+        <div class="kits-badge">✨ Coleções Curadas</div>
+        <h2>Kits de Presentes Prontos & Mais Desejados</h2>
+        <p>Composições completas de produtos reais que combinam perfeitamente para surpreender com elegância.</p>
+      </div>
+
+      <div class="kits-filter-bar" id="kitsFilterBar">
+        <button type="button" class="kit-filter-btn active" data-filter="all">Todos os Kits (12)</button>
+        <button type="button" class="kit-filter-btn" data-filter="gastronomia">🥩 Gastronomia & Bar</button>
+        <button type="button" class="kit-filter-btn" data-filter="tech-geek">💻 Tech & Gamer</button>
+        <button type="button" class="kit-filter-btn" data-filter="bem-estar">🌿 Spa & Casa</button>
+        <button type="button" class="kit-filter-btn" data-filter="ate-150">💰 Até R$ 150</button>
+      </div>
+
+      <div class="kits-grid" id="featuredKitsGrid">
+        <!-- Renderizado dinamicamente via script.js -->
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -165,5 +192,12 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(console.error);
+      });
+    }
+  </script>
 </body>
 </html>

@@ -258,6 +258,7 @@ let userSelections = {
 document.addEventListener("DOMContentLoaded", () => {
   setupInteractiveSelectors();
   setupGenerateButton();
+  initFeaturedKits();
 });
 
 function setupInteractiveSelectors() {
@@ -409,43 +410,40 @@ function getGiftImage(gift) {
   const text = `${gift.title} ${gift.category || ""} ${gift.searchQuery || ""} ${(gift.tags || []).join(" ")}`.toLowerCase();
 
   if (text.includes("churrasco") || text.includes("carne") || text.includes("faca")) {
-    return "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80";
+    return "assets/kits/kit-churrasco.jpg";
   }
   if (text.includes("cafe") || text.includes("café") || text.includes("prensa") || text.includes("moedor") || text.includes("caneca") || text.includes("expresso")) {
-    return "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80";
-  }
-  if (text.includes("fone") || text.includes("headphone") || text.includes("bluetooth") || text.includes("som") || text.includes("caixa") || text.includes("alexa") || text.includes("echo")) {
-    return "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80";
-  }
-  if (text.includes("smartwatch") || text.includes("relogio") || text.includes("relógio") || text.includes("pulseira")) {
-    return "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80";
+    return "assets/kits/kit-cafe.jpg";
   }
   if (text.includes("vinho") || text.includes("taca") || text.includes("taça") || text.includes("abridor") || text.includes("cerveja") || text.includes("bar")) {
-    return "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80";
+    return "assets/kits/kit-vinho.jpg";
   }
-  if (text.includes("livro") || text.includes("kindle") || text.includes("leitura")) {
-    return "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80";
+  if (text.includes("fone") || text.includes("headphone") || text.includes("bluetooth") || text.includes("smartwatch") || text.includes("relogio") || text.includes("relógio") || text.includes("tech") || text.includes("powerbank")) {
+    return "assets/kits/kit-tech.jpg";
   }
   if (text.includes("game") || text.includes("gamer") || text.includes("console") || text.includes("mouse") || text.includes("teclado") || text.includes("nerd")) {
-    return "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=600&q=80";
+    return "assets/kits/kit-gamer.jpg";
+  }
+  if (text.includes("livro") || text.includes("kindle") || text.includes("leitura")) {
+    return "assets/kits/kit-livros.jpg";
   }
   if (text.includes("fitness") || text.includes("treino") || text.includes("academia") || text.includes("garrafa") || text.includes("esporte")) {
-    return "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80";
+    return "assets/kits/kit-fitness.jpg";
   }
   if (text.includes("skincare") || text.includes("beleza") || text.includes("creme") || text.includes("perfume") || text.includes("maquiagem")) {
-    return "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80";
+    return "assets/kits/kit-skincare.jpg";
   }
   if (text.includes("planta") || text.includes("decoracao") || text.includes("decoração") || text.includes("luminaria") || text.includes("luminária") || text.includes("difusor") || text.includes("vela")) {
-    return "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=600&q=80";
+    return "assets/kits/kit-decoracao.jpg";
   }
-  if (text.includes("cozinha") || text.includes("panela") || text.includes("airfryer") || text.includes("gourmet")) {
-    return "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80";
+  if (text.includes("cozinha") || text.includes("panela") || text.includes("airfryer") || text.includes("gourmet") || text.includes("chef")) {
+    return "assets/kits/kit-chef.jpg";
   }
-  if (text.includes("viagem") || text.includes("mochila") || text.includes("mala")) {
-    return "https://images.unsplash.com/photo-1503220317375-aaad61436b1b?auto=format&fit=crop&w=600&q=80";
+  if (text.includes("viagem") || text.includes("mochila") || text.includes("mala") || text.includes("passaporte")) {
+    return "assets/kits/kit-viagem.jpg";
   }
 
-  return "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=80";
+  return "assets/kits/kit-premium.jpg";
 }
 
 function renderGiftCards(items, isAiGenerated = false) {
@@ -504,4 +502,294 @@ function renderGiftCards(items, isAiGenerated = false) {
   const resultsSection = document.getElementById("resultsSection");
   resultsSection.style.display = "block";
   resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// ============================================================
+// COLEÇÃO DE KITS DE PRESENTES PRONTOS & MAIS DESEJADOS
+// ============================================================
+const FEATURED_KITS = [
+  {
+    id: "kit-churrasco",
+    title: "Kit Churrasqueiro Master",
+    tagline: "Para quem leva o churrasco a sério",
+    categoryTag: "Churrasco",
+    filter: "gastronomia",
+    priceMin: 120,
+    priceMax: 220,
+    image: "assets/kits/kit-churrasco.jpg",
+    items: [
+      "Faca do Chef de Aço Damasco c/ Cabo Nobre",
+      "Tábua Rústica de Madeira Maciça",
+      "Garra de Urso em Alumínio Polido",
+      "Moedor de Sal Grosso e Pimenta"
+    ],
+    searchQuery: "kit churrasco profissional faca damasco tabua garra de urso"
+  },
+  {
+    id: "kit-cafe",
+    title: "Kit Barista em Casa",
+    tagline: "O ritual perfeito do café especial",
+    categoryTag: "Café Especial",
+    filter: "gastronomia",
+    priceMin: 110,
+    priceMax: 195,
+    image: "assets/kits/kit-cafe.jpg",
+    items: [
+      "Prensa Francesa de Vidro Borossilicato e Inox",
+      "Moedor Manual de Grãos com Lâmina de Cerâmica",
+      "Pacote de Grãos Especiais 100% Arábica",
+      "Caneca de Cerâmica Artesanal Minimalista"
+    ],
+    searchQuery: "prensa francesa moedor cafe manual graos especiais"
+  },
+  {
+    id: "kit-vinho",
+    title: "Kit Sommelier & Degustação",
+    tagline: "Elegância e praticidade para noites de vinho",
+    categoryTag: "Vinhos & Bar",
+    filter: "gastronomia",
+    priceMin: 95,
+    priceMax: 180,
+    image: "assets/kits/kit-vinho.jpg",
+    items: [
+      "Abridor Elétrico de Vinhos Recarregável",
+      "Aerador Dosador de Fluxo Rápido",
+      "Bomba a Vácuo com 2 Rolhas Herméticas",
+      "Decantador de Vidro Cristalino"
+    ],
+    searchQuery: "kit vinho abridor eletrico aerador dosador vacuo"
+  },
+  {
+    id: "kit-tech",
+    title: "Kit Produtividade & Tech",
+    tagline: "Tecnologia minimalista para o dia a dia",
+    categoryTag: "Tecnologia",
+    filter: "tech-geek",
+    priceMin: 140,
+    priceMax: 290,
+    image: "assets/kits/kit-tech.jpg",
+    items: [
+      "Fone Bluetooth TWS c/ Cancelamento Ativo",
+      "Carregador por Indução Sem Fio 3 em 1",
+      "Powerbank Slim de Alumínio 10.000mAh",
+      "Organizador de Cabos em Couro"
+    ],
+    searchQuery: "fone bluetooth tws carregador inducao sem fio powerbank"
+  },
+  {
+    id: "kit-gamer",
+    title: "Kit Gamer Setup Pro",
+    tagline: "Imersão total e conforto nas partidas",
+    categoryTag: "Games & Geek",
+    filter: "tech-geek",
+    priceMin: 130,
+    priceMax: 260,
+    image: "assets/kits/kit-gamer.jpg",
+    items: [
+      "Headset Gamer Estéreo com Microfone Redutor",
+      "Controle Joystick Sem Fio Ergonômico",
+      "Mousepad Gamer Estendido Bordado",
+      "Suporte de Mesa para Fone com Hub USB"
+    ],
+    searchQuery: "headset gamer controle sem fio mousepad speed estendido"
+  },
+  {
+    id: "kit-livros",
+    title: "Kit Leitor Imersivo",
+    tagline: "Conforto para viajar por novas histórias",
+    categoryTag: "Livros & Cultura",
+    filter: "bem-estar",
+    priceMin: 85,
+    priceMax: 170,
+    image: "assets/kits/kit-livros.jpg",
+    items: [
+      "Luminária LED Flexível de Leitura Noturna",
+      "Capa Protetora de Couro / E-reader",
+      "Marcador de Página Metálico Magnético",
+      "Caneca Térmica de Cerâmica com Tampa"
+    ],
+    searchQuery: "luminaria leitura clip livro kindle capa marcador magnetico"
+  },
+  {
+    id: "kit-skincare",
+    title: "Kit Spa Facial & Autocuidado",
+    tagline: "Momento de pausa e revitalização da pele",
+    categoryTag: "Skincare",
+    filter: "bem-estar",
+    priceMin: 75,
+    priceMax: 150,
+    image: "assets/kits/kit-skincare.jpg",
+    items: [
+      "Rolo Massageador de Jade Autêntica + Gua Sha",
+      "Sérum Facial Vitamina C e Ácido Hialurônico",
+      "Faixa de Cabelo Atoalhada Conforto",
+      "Vela Aromática de Cera de Soja e Lavanda"
+    ],
+    searchQuery: "kit skincare rolo pedra jade gua sha serum facial vitamina c"
+  },
+  {
+    id: "kit-casa",
+    title: "Kit Casa Aconchegante & Zen",
+    tagline: "Transforme qualquer ambiente em refúgio",
+    categoryTag: "Decoração & Casa",
+    filter: "bem-estar",
+    priceMin: 90,
+    priceMax: 165,
+    image: "assets/kits/kit-decoracao.jpg",
+    items: [
+      "Difusor de Aromas Ultrassônico c/ LED Noturno",
+      "Kit de Óleos Essenciais Puros (Lavanda & Alecrim)",
+      "Vela Vegetal em Vidro Âmbar",
+      "Vaso de Cerâmica Minimalista"
+    ],
+    searchQuery: "difusor ultrassonico aromas oleos essenciais vela aromatica"
+  },
+  {
+    id: "kit-fitness",
+    title: "Kit Treino & Vida Ativa",
+    tagline: "Energia, saúde e performance em qualquer lugar",
+    categoryTag: "Fitness & Treino",
+    filter: "tech-geek",
+    priceMin: 70,
+    priceMax: 145,
+    image: "assets/kits/kit-fitness.jpg",
+    items: [
+      "Garrafa Térmica Inox Vacuum 750ml c/ Medidor",
+      "Kit de Elásticos Extensores Mini Bands (5 Níveis)",
+      "Corda de Pular de Aço com Rolamento Rápido",
+      "Toalha de Secagem Ultra Rápida Esportiva"
+    ],
+    searchQuery: "garrafa termica inox academia kit mini bands corda pular aco"
+  },
+  {
+    id: "kit-chef",
+    title: "Kit Masterchef Gourmet",
+    tagline: "Para quem ama impressionar na cozinha",
+    categoryTag: "Cozinha & Gastronomia",
+    filter: "gastronomia",
+    priceMin: 110,
+    priceMax: 210,
+    image: "assets/kits/kit-chef.jpg",
+    items: [
+      "Frigideira de Ferro Fundido 24cm Pré-Curada",
+      "Faca do Chef Japonesa Santoku em Aço Inox",
+      "Conjunto de Moedores de Sal e Pimenta em Bambu",
+      "Avental de Cozinha em Algodão Encerado"
+    ],
+    searchQuery: "frigideira ferro fundido faca chef santoku moedor sal bambu"
+  },
+  {
+    id: "kit-viagem",
+    title: "Kit Viajante Esperto",
+    tagline: "Organização e leveza para qualquer destino",
+    categoryTag: "Viagens & Aventura",
+    filter: "tech-geek",
+    priceMin: 95,
+    priceMax: 185,
+    image: "assets/kits/kit-viagem.jpg",
+    items: [
+      "Mochila Antifurto Impermeável com Porta USB",
+      "Almofada de Pescoço em Espuma de Memória",
+      "Kit de Organizadores de Mala c/ Compressão",
+      "Porta Passaporte e Documentos Slim em Couro"
+    ],
+    searchQuery: "mochila antifurto viagem organizadores mala almofada pescoco memoria"
+  },
+  {
+    id: "kit-premium",
+    title: "Kit Caixa Presente Suprema",
+    tagline: "O presente universal e infalível de alto luxo",
+    categoryTag: "Especial & Luxo",
+    filter: "gastronomia",
+    priceMin: 115,
+    priceMax: 240,
+    image: "assets/kits/kit-premium.jpg",
+    items: [
+      "Caixa Rígida de Luxo com Fita de Cetim Marfim",
+      "Seleção de Bombons e Trufas de Chocolate Suíço",
+      "Vela Aromática Decorativa Edição Ouro",
+      "Cartão com Mensagem Especial Personalizada"
+    ],
+    searchQuery: "caixa presente luxo chocolates importados trufas vela aromatica"
+  }
+];
+
+function initFeaturedKits() {
+  const container = document.getElementById("featuredKitsGrid");
+  const filterButtons = document.querySelectorAll("#kitsFilterBar .kit-filter-btn");
+
+  if (!container) return;
+
+  function render(filter = "all") {
+    container.innerHTML = "";
+    const filtered = filter === "all"
+      ? FEATURED_KITS
+      : (filter === "ate-150"
+          ? FEATURED_KITS.filter((k) => k.priceMin <= 100)
+          : FEATURED_KITS.filter((k) => k.filter === filter));
+
+    filtered.forEach((kit) => {
+      const amazonUrl = `https://www.amazon.com.br/s?k=${encodeURIComponent(kit.searchQuery)}&tag=${AMAZON_AFFILIATE_TAG}`;
+      const mlUrl = `https://lista.mercadolivre.com.br/${encodeURIComponent(kit.searchQuery)}`;
+      const whatsAppMsg = `Olha esse kit de presente incrível que achei: *${kit.title}*! Dá uma olhada aqui: ${amazonUrl}`;
+      const whatsAppUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsAppMsg)}`;
+
+      const card = document.createElement("div");
+      card.className = "kit-card";
+
+      const itemsHtml = kit.items.map((item) => `<li>${item}</li>`).join("");
+
+      card.innerHTML = `
+        <div class="kit-card-media">
+          <img src="${kit.image}" alt="${kit.title}" loading="lazy">
+          <span class="kit-tag-badge">${kit.categoryTag}</span>
+          <span class="kit-price-tag">R$ ${kit.priceMin} - ${kit.priceMax}</span>
+        </div>
+
+        <div class="kit-card-content">
+          <h3>${kit.title}</h3>
+          <div class="kit-tagline">${kit.tagline}</div>
+
+          <div class="kit-items-list">
+            <div class="kit-items-label">Itens que compõem este Kit:</div>
+            <ul>
+              ${itemsHtml}
+            </ul>
+          </div>
+
+          <div class="kit-card-actions">
+            <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="btn-amazon-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+              <span>Ver Itens na Amazon</span>
+              <span class="btn-prime-pill">Prime</span>
+            </a>
+
+            <div class="gift-secondary-row">
+              <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="btn-ml-secondary">
+                <span>Mercado Livre</span>
+              </a>
+              <a href="${whatsAppUrl}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share" title="Mandar Kit no WhatsApp">
+                <span>💬 Enviar</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      const filter = btn.getAttribute("data-filter");
+      render(filter);
+    });
+  });
+
+  render("all");
 }
