@@ -313,79 +313,117 @@ function setupInteractiveSelectors() {
 
 function setupGenerateButton() {
   const btn = document.getElementById("btnGenerate");
-  btn.addEventListener("click", () => {
-    // Efeito de feedback
-    btn.innerHTML = `<span>Buscando as melhores opções...</span>`;
+  btn.addEventListener("click", async () => {
+    btn.innerHTML = `<span>✨ IA Pensando no Presente Ideal...</span>`;
     btn.disabled = true;
 
-    setTimeout(() => {
-      generateRecommendations();
+    try {
+      await generateRecommendationsWithAI();
+    } catch (e) {
+      console.warn("Fallback para o motor local:", e);
+      generateRecommendationsLocal();
+    } finally {
       btn.innerHTML = `<span>✨ Encontrar Outras Sugestões</span>`;
       btn.disabled = false;
-    }, 400);
+    }
   });
 }
 
-function generateRecommendations() {
+async function generateRecommendationsWithAI() {
+  const customDetail = document.getElementById("customDetail").value.trim();
+  const maxBudget = parseInt(userSelections.budget, 10) || 150;
+  const selectedTags = Array.from(userSelections.tags);
+
+  const payload = {
+    relation: userSelections.relation,
+    age: userSelections.age,
+    budget: maxBudget,
+    tags: selectedTags,
+    customDetail: customDetail,
+  };
+
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+  const response = await fetch("/api/sugestoes", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    signal: controller.signal,
+  });
+
+  clearTimeout(timeoutId);
+
+  if (!response.ok) {
+    throw new Error("Falha na API de sugestões");
+  }
+
+  const data = await response.json();
+
+  if (data.success && Array.isArray(data.items) && data.items.length > 0) {
+    renderGiftCards(data.items, true);
+  } else {
+    generateRecommendationsLocal();
+  }
+}
+
+function generateRecommendationsLocal() {
   const customDetail = document.getElementById("customDetail").value.toLowerCase().trim();
   const maxBudget = parseInt(userSelections.budget, 10) || 300;
   const selectedTags = Array.from(userSelections.tags);
 
-  // Sistema de pontuação semântica
   const scoredItems = GIFT_DATABASE.map((item) => {
     let score = 0;
 
-    // Pontua se a tag de interesse bate
     item.tags.forEach((t) => {
       if (selectedTags.includes(t)) score += 4;
       if (customDetail && customDetail.includes(t)) score += 5;
     });
 
-    // Pontua se a relação é compatível
     if (item.relations.includes(userSelections.relation) || item.relations.includes("qualquer")) {
       score += 3;
     }
 
-    // Pontua se a faixa etária é compatível
     if (item.ages.includes(userSelections.age)) {
       score += 2;
     }
 
-    // Pontua se cabe dentro do orçamento selecionado
     if (item.priceMin <= maxBudget) {
       score += 3;
     } else {
-      score -= 2; // Penaliza se ultrapassar muito o orçamento
+      score -= 2;
     }
 
-    // Pequeno fator aleatório para variar os resultados em cliques subsequentes
     score += Math.random() * 2;
 
     return { ...item, score };
   });
 
-  // Ordena pelos maiores scores e seleciona os 4 melhores
   scoredItems.sort((a, b) => b.score - a.score);
   const bestPicks = scoredItems.slice(0, 4);
 
-  renderGiftCards(bestPicks);
+  renderGiftCards(bestPicks, false);
 }
 
-function renderGiftCards(items) {
+function renderGiftCards(items, isAiGenerated = false) {
   const container = document.getElementById("giftCardsGrid");
   container.innerHTML = "";
 
   items.forEach((gift) => {
-    // Montagem dos links de afiliado com busca formatada
     const amazonUrl = `https://www.amazon.com.br/s?k=${encodeURIComponent(gift.searchQuery)}&tag=${AMAZON_AFFILIATE_TAG}`;
     const mlUrl = `https://lista.mercadolivre.com.br/${encodeURIComponent(gift.searchQuery)}`;
+    const whatsAppMsg = `Olha essa ideia de presente que achei para você: *${gift.title}*! Dá uma olhada aqui: ${amazonUrl}`;
+    const whatsAppUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsAppMsg)}`;
 
     const card = document.createElement("div");
     card.className = "gift-card";
 
     card.innerHTML = `
       <div>
-        <span class="gift-category-tag">${gift.category}</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <span class="gift-category-tag">${gift.category || "Presente Especial"}</span>
+          ${isAiGenerated ? '<span style="font-size: 0.72rem; color: #6366f1; font-weight: 700;">✨ Criado com IA</span>' : ""}
+        </div>
         <h3>${gift.title}</h3>
         <div class="gift-price-estimate">Aprox. R$ ${gift.priceMin} - R$ ${gift.priceMax}</div>
         <div class="gift-reason-box">
@@ -401,9 +439,14 @@ function renderGiftCards(items) {
           </svg>
           Ver Melhores Ofertas na Amazon
         </a>
-        <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="btn-ml">
-          Ver Opções no Mercado Livre
-        </a>
+        <div style="display: flex; gap: 8px;">
+          <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="btn-ml" style="flex: 1;">
+            Mercado Livre
+          </a>
+          <a href="${whatsAppUrl}" target="_blank" rel="noopener noreferrer" class="btn-action-outline" style="padding: 8px 12px; background: #25d366; color: white; border-color: #25d366; text-decoration: none; font-size: 0.85rem; font-weight: 700; border-radius: 8px; display: flex; align-items: center; gap: 4px;" title="Compartilhar no WhatsApp">
+            💬 Enviar
+          </a>
+        </div>
       </div>
     `;
 
