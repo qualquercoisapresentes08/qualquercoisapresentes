@@ -1,8 +1,8 @@
 // QualquerCoisa - Buscador Inteligente de Presentes
 // Motor de Recomendação Curada + Gerador de Links de Afiliado
 
-// TAGS DE AFILIADO (Substitua pelas suas tags quando aprovado)
-const AMAZON_AFFILIATE_TAG = "qualquercoisa-20";
+// TAGS DE AFILIADO OFICIAIS
+const AMAZON_AFFILIATE_TAG = "qualquercoi05-20";
 const MERCADO_LIVRE_AFFILIATE_ID = ""; // Opcional para Mercado Livre Afiliados
 
 // Base rica de sugestões mapeadas com alta taxa de conversão e intenção de compra
