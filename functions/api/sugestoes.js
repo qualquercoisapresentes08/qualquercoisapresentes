@@ -45,7 +45,7 @@ Responda APENAS um array JSON válido no formato:
 
     const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
 
-    const response = await fetch(geminiUrl, {
+    let response = await fetch(geminiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -60,6 +60,19 @@ Responda APENAS um array JSON válido no formato:
         }
       })
     });
+
+    // Se o Google estiver com pico temporário de demanda (503), aguarda 1 segundo e tenta mais uma vez
+    if (response.status === 503) {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      response = await fetch(geminiUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: prompt }] }],
+          generationConfig: { temperature: 0.7, responseMimeType: "application/json" }
+        })
+      });
+    }
 
     if (!response.ok) {
       const err = await response.text();
