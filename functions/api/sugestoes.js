@@ -8,7 +8,6 @@ export async function onRequestPost(context) {
 
     const apiKey = env?.GEMINI_API_KEY;
     if (!apiKey) {
-      // Se a variável de ambiente ainda não foi configurada, usa o fallback local
       return new Response(JSON.stringify({ success: false, fallback: true, message: "GEMINI_API_KEY_NOT_SET" }), {
         status: 200,
         headers: { "Content-Type": "application/json" }
@@ -32,7 +31,7 @@ Instruções obrigatórias:
 3. A justificativa (reason) deve ser persuasiva, carinhosa e explicar claramente por que a pessoa vai amar.
 4. O campo "searchQuery" deve ser um termo de busca limpo e direto para encontrar o produto na Amazon (ex: "prensa francesa vidro cafe", "abridor vinho eletrico", "fone bluetooth tws").
 
-Responda APENAS um array JSON válido (sem blocos de markdown, sem explicações), seguindo exatamente esta estrutura:
+Responda APENAS um array JSON válido no formato:
 [
   {
     "title": "Nome atraente do presente",
@@ -71,14 +70,28 @@ Responda APENAS um array JSON válido (sem blocos de markdown, sem explicações
     }
 
     const result = await response.json();
-    const rawText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+    const parts = result?.candidates?.[0]?.content?.parts || [];
+    
+    // Procura a parte de texto que contém a resposta (ignorando blocos internos de thought se houver)
+    let rawText = "";
+    for (let i = parts.length - 1; i >= 0; i--) {
+      if (parts[i]?.text) {
+        rawText = parts[i].text.trim();
+        break;
+      }
+    }
 
     let items = [];
-    try {
+    const arrayMatch = rawText.match(/\[[\s\S]*\]/);
+    const objectMatch = rawText.match(/\{[\s\S]*\}/);
+
+    if (arrayMatch) {
+      items = JSON.parse(arrayMatch[0]);
+    } else if (objectMatch) {
+      const parsed = JSON.parse(objectMatch[0]);
+      items = Array.isArray(parsed) ? parsed : (parsed.items || parsed.gifts || parsed.sugestoes || Object.values(parsed).find(v => Array.isArray(v)) || []);
+    } else {
       items = JSON.parse(rawText);
-    } catch (parseError) {
-      const cleaned = rawText.replace(/```json/g, "").replace(/```/g, "").trim();
-      items = JSON.parse(cleaned);
     }
 
     return new Response(JSON.stringify({ success: true, items }), {
