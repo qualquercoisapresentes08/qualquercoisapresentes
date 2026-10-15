@@ -736,3 +736,33 @@ footer {
   margin-top: 12px;
   text-align: center;
 }
+
+/* Sub-itens clicáveis dentro dos kits */
+.kit-item-link {
+  color: var(--slate-700);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.kit-item-link:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.kit-item-link::after {
+  content: "↗";
+  font-size: 0.72rem;
+  color: var(--primary);
+  opacity: 0.6;
+  margin-left: 4px;
+}
+
+.gift-secondary-row .btn-whatsapp-share {
+  flex: 1;
+  justify-content: center;
+}

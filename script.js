@@ -453,7 +453,8 @@ function renderGiftCards(items, isAiGenerated = false) {
   items.forEach((gift) => {
     const amazonUrl = `https://www.amazon.com.br/s?k=${encodeURIComponent(gift.searchQuery)}&tag=${AMAZON_AFFILIATE_TAG}`;
     const mlUrl = `https://lista.mercadolivre.com.br/${encodeURIComponent(gift.searchQuery)}`;
-    const whatsAppMsg = `Olha essa ideia de presente que achei para você: *${gift.title}*! Dá uma olhada aqui: ${amazonUrl}`;
+    const siteUrl = "https://qualquercoisapresentes.com.br/";
+    const whatsAppMsg = `Olha essa ideia de presente que achei no QualquerCoisa: *${gift.title}*! 🎁\n\nConheça o site: ${siteUrl}\n\nOu veja direto na Amazon: ${amazonUrl}`;
     const whatsAppUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsAppMsg)}`;
     const imageUrl = getGiftImage(gift);
 
@@ -477,7 +478,7 @@ function renderGiftCards(items, isAiGenerated = false) {
       </div>
 
       <div class="gift-actions">
-        <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="btn-amazon-primary">
+        <a href="${amazonUrl}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="btn-amazon-primary">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
           </svg>
@@ -486,11 +487,8 @@ function renderGiftCards(items, isAiGenerated = false) {
         </a>
 
         <div class="gift-secondary-row">
-          <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="btn-ml-secondary">
-            <span>Ver no Mercado Livre</span>
-          </a>
-          <a href="${whatsAppUrl}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share" title="Mandar ideia no WhatsApp">
-            <span>💬 Enviar</span>
+          <a href="${whatsAppUrl}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="btn-whatsapp-share" title="Mandar ideia no WhatsApp">
+            <span>💬 Compartilhar Ideia no WhatsApp</span>
           </a>
         </div>
       </div>
