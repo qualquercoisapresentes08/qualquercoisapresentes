@@ -720,76 +720,26 @@ function initFeaturedKits() {
 
   if (!container) return;
 
-  function render(filter = "all") {
-    container.innerHTML = "";
-    const filtered = filter === "all"
-      ? FEATURED_KITS
-      : (filter === "ate-150"
-          ? FEATURED_KITS.filter((k) => k.priceMin <= 100)
-          : FEATURED_KITS.filter((k) => k.filter === filter));
-
-    filtered.forEach((kit) => {
-      const amazonUrl = `https://www.amazon.com.br/s?k=${encodeURIComponent(kit.searchQuery)}&tag=${AMAZON_AFFILIATE_TAG}`;
-      const mlUrl = `https://lista.mercadolivre.com.br/${encodeURIComponent(kit.searchQuery)}`;
-      const whatsAppMsg = `Olha esse kit de presente incrível que achei: *${kit.title}*! Dá uma olhada aqui: ${amazonUrl}`;
-      const whatsAppUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsAppMsg)}`;
-
-      const card = document.createElement("div");
-      card.className = "kit-card";
-
-      const itemsHtml = kit.items.map((item) => `<li>${item}</li>`).join("");
-
-      card.innerHTML = `
-        <div class="kit-card-media">
-          <img src="${kit.image}" alt="${kit.title}" loading="lazy">
-          <span class="kit-tag-badge">${kit.categoryTag}</span>
-          <span class="kit-price-tag">R$ ${kit.priceMin} - ${kit.priceMax}</span>
-        </div>
-
-        <div class="kit-card-content">
-          <h3>${kit.title}</h3>
-          <div class="kit-tagline">${kit.tagline}</div>
-
-          <div class="kit-items-list">
-            <div class="kit-items-label">Itens que compõem este Kit:</div>
-            <ul>
-              ${itemsHtml}
-            </ul>
-          </div>
-
-          <div class="kit-card-actions">
-            <a href="${amazonUrl}" target="_blank" rel="noopener noreferrer" class="btn-amazon-primary">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-              </svg>
-              <span>Ver Itens na Amazon</span>
-              <span class="btn-prime-pill">Prime</span>
-            </a>
-
-            <div class="gift-secondary-row">
-              <a href="${mlUrl}" target="_blank" rel="noopener noreferrer" class="btn-ml-secondary">
-                <span>Mercado Livre</span>
-              </a>
-              <a href="${whatsAppUrl}" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share" title="Mandar Kit no WhatsApp">
-                <span>💬 Enviar</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      `;
-
-      container.appendChild(card);
-    });
-  }
+  const cards = container.querySelectorAll(".kit-card");
 
   filterButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       filterButtons.forEach((b) => b.classList.remove("active"));
       btn.classList.add("active");
       const filter = btn.getAttribute("data-filter");
-      render(filter);
+
+      cards.forEach((card) => {
+        const cardFilter = card.getAttribute("data-filter");
+        const priceMin = parseInt(card.getAttribute("data-price-min"), 10) || 0;
+
+        if (filter === "all") {
+          card.style.display = "flex";
+        } else if (filter === "ate-150") {
+          card.style.display = priceMin <= 100 ? "flex" : "none";
+        } else {
+          card.style.display = cardFilter === filter ? "flex" : "none";
+        }
+      });
     });
   });
-
-  render("all");
 }
