@@ -3,7 +3,6 @@
 
 // TAGS DE AFILIADO OFICIAIS
 const AMAZON_AFFILIATE_TAG = "qualquercoi05-20";
-const MERCADO_LIVRE_AFFILIATE_ID = ""; // Opcional para Mercado Livre Afiliados
 
 // Base rica de sugestões mapeadas com alta taxa de conversão e intenção de compra
 const GIFT_DATABASE = [
@@ -452,8 +451,7 @@ function renderGiftCards(items, isAiGenerated = false) {
 
   items.forEach((gift) => {
     const amazonUrl = `https://www.amazon.com.br/s?k=${encodeURIComponent(gift.searchQuery)}&tag=${AMAZON_AFFILIATE_TAG}`;
-    const mlUrl = `https://lista.mercadolivre.com.br/${encodeURIComponent(gift.searchQuery)}`;
-    const siteUrl = "https://qualquercoisapresentes.com.br/";
+        const siteUrl = "https://qualquercoisapresentes.com.br/";
     const whatsAppMsg = `Olha essa ideia de presente que achei no QualquerCoisa: *${gift.title}*! 🎁\n\nConheça o site: ${siteUrl}\n\nOu veja direto na Amazon: ${amazonUrl}`;
     const whatsAppUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsAppMsg)}`;
     const imageUrl = getGiftImage(gift);
@@ -488,7 +486,7 @@ function renderGiftCards(items, isAiGenerated = false) {
 
         <div class="gift-secondary-row">
           <a href="${whatsAppUrl}" target="_blank" rel="nofollow sponsored noopener noreferrer" class="btn-whatsapp-share" title="Mandar ideia no WhatsApp">
-            <span>💬 Compartilhar Ideia no WhatsApp</span>
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M9.53 7.03C9.33 7.03 9 7.11 8.76 7.37C8.5 7.64 7.85 8.27 7.85 9.55C7.85 10.83 8.78 12.06 8.91 12.23C9.04 12.4 10.74 15.03 13.35 16.16C15.53 17.09 15.97 16.91 16.44 16.86C16.91 16.81 17.96 16.24 18.18 15.62C18.4 15 18.4 14.47 18.33 14.36C18.26 14.25 18.06 14.19 17.76 14.04C17.46 13.9 15.98 13.17 15.7 13.07C15.42 12.97 15.22 12.92 15.02 13.22C14.82 13.52 14.25 14.19 14.07 14.39C13.9 14.59 13.73 14.61 13.43 14.46C13.13 14.31 12.17 14 11.03 12.99C10.15 12.2 9.55 11.23 9.38 10.93C9.21 10.63 9.36 10.47 9.51 10.32C9.65 10.18 9.82 9.96 9.97 9.79C10.12 9.62 10.17 9.5 10.27 9.3C10.37 9.1 10.32 8.92 10.25 8.77C10.17 8.62 9.6 7.23 9.53 7.03Z"/></svg><span>Mandar no WhatsApp</span>
           </a>
         </div>
       </div>
