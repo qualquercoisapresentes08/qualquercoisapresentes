@@ -256,6 +256,7 @@ let userSelections = {
 
 document.addEventListener("DOMContentLoaded", () => {
   setupInteractiveSelectors();
+  setupCharCounter();
   setupGenerateButton();
   initFeaturedKits();
 });
@@ -313,9 +314,43 @@ function setupInteractiveSelectors() {
 
 function setupGenerateButton() {
   const btn = document.getElementById("btnGenerate");
+  const hud = document.getElementById("aiScannerHud");
+  const progressBar = document.getElementById("scannerProgressBar");
+  const percentage = document.getElementById("scannerPercentage");
+  const statusIcon = document.getElementById("scannerStatusIcon");
+  const statusText = document.getElementById("scannerStatusText");
+
   btn.addEventListener("click", async () => {
-    btn.innerHTML = `<span>✨ IA Pensando no Presente Ideal...</span>`;
     btn.disabled = true;
+    btn.classList.add("btn-loading");
+    btn.innerHTML = `<span>✨ IA Consultando o Catálogo...</span>`;
+
+    // Exibir HUD
+    if (hud) {
+      hud.style.display = "block";
+      progressBar.style.width = "5%";
+      percentage.textContent = "5%";
+      statusIcon.textContent = "🔍";
+      statusText.textContent = "Decodificando perfil e intenção de compra...";
+    }
+
+    let progress = 5;
+    const interval = setInterval(() => {
+      if (progress < 90) {
+        progress += Math.floor(Math.random() * 8) + 5;
+        if (progress > 90) progress = 90;
+        if (progressBar) progressBar.style.width = `${progress}%`;
+        if (percentage) percentage.textContent = `${progress}%`;
+
+        if (progress >= 25 && progress < 55) {
+          statusIcon.textContent = "🧠";
+          statusText.textContent = "Cruzando interesses com os Best-Sellers da Amazon...";
+        } else if (progress >= 55) {
+          statusIcon.textContent = "⭐";
+          statusText.textContent = "Filtrando opções com nota 4.8★ e entrega Prime...";
+        }
+      }
+    }, 200);
 
     try {
       await generateRecommendationsWithAI();
@@ -323,8 +358,18 @@ function setupGenerateButton() {
       console.warn("Fallback para o motor local:", e);
       generateRecommendationsLocal();
     } finally {
-      btn.innerHTML = `<span>✨ Encontrar Outras Sugestões</span>`;
-      btn.disabled = false;
+      clearInterval(interval);
+      if (progressBar) progressBar.style.width = "100%";
+      if (percentage) percentage.textContent = "100%";
+      if (statusIcon) statusIcon.textContent = "✨";
+      if (statusText) statusText.textContent = "Curadoria concluída com sucesso!";
+
+      setTimeout(() => {
+        if (hud) hud.style.display = "none";
+        btn.classList.remove("btn-loading");
+        btn.innerHTML = `<span>✨ Refazer ou Buscar Novas Ideias</span>`;
+        btn.disabled = false;
+      }, 700);
     }
   });
 }
@@ -738,4 +783,21 @@ function initFeaturedKits() {
       });
     });
   });
+}
+
+function setupCharCounter() {
+  // Contador de caracteres para o Passo 1
+  const customDetailInput = document.getElementById("customDetail");
+  const charCounter = document.getElementById("charCounter");
+  if (customDetailInput && charCounter) {
+    customDetailInput.addEventListener("input", () => {
+      const len = customDetailInput.value.length;
+      charCounter.textContent = `${len}/250`;
+      if (len >= 220) {
+        charCounter.classList.add("warning");
+      } else {
+        charCounter.classList.remove("warning");
+      }
+    });
+  }
 }

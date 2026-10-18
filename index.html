@@ -291,9 +291,60 @@
     <!-- Formulário Interativo por Características -->
     <div class="finder-card">
       
-      <!-- Passo 1: Relação / Parentesco -->
+      <!-- Passo 1: O que ela disse ou como ela é? (Campo Livre de Alto Impacto) -->
+      <div class="form-section form-section-highlight">
+        <div class="step-header-flex">
+          <label class="step-label" for="customDetail">
+            1. O que a pessoa disse que quer? Ou conte como ela é:
+          </label>
+          <span class="char-counter" id="charCounter">0/250</span>
+        </div>
+        <div class="input-wrapper">
+          <input type="text" id="customDetail" class="custom-input" maxlength="250" placeholder="Ex: Disse que queria qualquer coisa, mas adora café especial, livros e coisas práticas..." autocomplete="off">
+          <span class="input-hint">💡 Dica: Pode desabafar com suas palavras! Nossa IA decodifica o presente ideal.</span>
+        </div>
+      </div>
+
+      <!-- Passo 2: Orçamento Máximo -->
       <div class="form-section">
-        <label class="step-label">1. Para quem é o presente?</label>
+        <label class="step-label">2. Até quanto você quer gastar?</label>
+        <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+          <button type="button" class="option-btn" data-group="budget" data-value="50">
+            Até R$ 50
+          </button>
+          <button type="button" class="option-btn selected" data-group="budget" data-value="150">
+            Até R$ 150
+          </button>
+          <button type="button" class="option-btn" data-group="budget" data-value="300">
+            Até R$ 300
+          </button>
+          <button type="button" class="option-btn" data-group="budget" data-value="1000">
+            Sem Limite
+          </button>
+        </div>
+      </div>
+
+      <!-- Passo 3: Interesses e Hobbies (Multi-seleção) -->
+      <div class="form-section">
+        <label class="step-label">3. O que essa pessoa mais curte? (Escolha 1 ou mais)</label>
+        <div class="tags-cloud">
+          <span class="tag-pill" data-tag="churrasco">🥩 Churrasco</span>
+          <span class="tag-pill selected" data-tag="cafe">☕ Café Especial</span>
+          <span class="tag-pill selected" data-tag="tech">💻 Tecnologia & Gadgets</span>
+          <span class="tag-pill" data-tag="vinhos">🍷 Vinhos & Bar</span>
+          <span class="tag-pill" data-tag="livros">📚 Livros & Leitura</span>
+          <span class="tag-pill" data-tag="games">🎮 Games & Nerd</span>
+          <span class="tag-pill" data-tag="fitness">🏃 Fitness & Academia</span>
+          <span class="tag-pill" data-tag="skincare">💄 Skincare & Beleza</span>
+          <span class="tag-pill" data-tag="decoracao">🌿 Plantas & Casa</span>
+          <span class="tag-pill" data-tag="viagem">✈️ Viagens & Aventuras</span>
+          <span class="tag-pill" data-tag="cozinha">🍳 Cozinha Gourmet</span>
+        </div>
+      </div>
+
+      <!-- Passo 4: Relação / Parentesco -->
+      <div class="form-section">
+        <label class="step-label">4. Para quem é o presente?</label>
         <div class="options-grid">
           <button type="button" class="option-btn selected" data-group="relation" data-value="namorado">
             <span class="opt-icon">❤️</span> Namorado(a)
@@ -322,9 +373,9 @@
         </div>
       </div>
 
-      <!-- Passo 2: Faixa Etária -->
+      <!-- Passo 5: Faixa Etária -->
       <div class="form-section">
-        <label class="step-label">2. Qual é a faixa etária da pessoa?</label>
+        <label class="step-label">5. Qual é a faixa etária da pessoa?</label>
         <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
           <button type="button" class="option-btn" data-group="age" data-value="jovem">
             Jovem (12 a 17 anos)
@@ -341,52 +392,28 @@
         </div>
       </div>
 
-      <!-- Passo 3: Orçamento Máximo -->
-      <div class="form-section">
-        <label class="step-label">3. Até quanto você quer gastar?</label>
-        <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
-          <button type="button" class="option-btn" data-group="budget" data-value="50">
-            Até R$ 50
-          </button>
-          <button type="button" class="option-btn selected" data-group="budget" data-value="150">
-            Até R$ 150
-          </button>
-          <button type="button" class="option-btn" data-group="budget" data-value="300">
-            Até R$ 300
-          </button>
-          <button type="button" class="option-btn" data-group="budget" data-value="1000">
-            Sem Limite
-          </button>
-        </div>
-      </div>
-
-      <!-- Passo 4: Interesses e Hobbies (Multi-seleção) -->
-      <div class="form-section">
-        <label class="step-label">4. O que essa pessoa mais curte? (Escolha 1 ou mais)</label>
-        <div class="tags-cloud">
-          <span class="tag-pill" data-tag="churrasco">🥩 Churrasco</span>
-          <span class="tag-pill selected" data-tag="cafe">☕ Café Especial</span>
-          <span class="tag-pill selected" data-tag="tech">💻 Tecnologia & Gadgets</span>
-          <span class="tag-pill" data-tag="vinhos">🍷 Vinhos & Bar</span>
-          <span class="tag-pill" data-tag="livros">📚 Livros & Leitura</span>
-          <span class="tag-pill" data-tag="games">🎮 Games & Nerd</span>
-          <span class="tag-pill" data-tag="fitness">🏃 Fitness & Academia</span>
-          <span class="tag-pill" data-tag="skincare">💄 Skincare & Beleza</span>
-          <span class="tag-pill" data-tag="decoracao">🌿 Plantas & Casa</span>
-          <span class="tag-pill" data-tag="viagem">✈️ Viagens & Aventuras</span>
-          <span class="tag-pill" data-tag="cozinha">🍳 Cozinha Gourmet</span>
-        </div>
-      </div>
-
-      <!-- Passo 5: Detalhe Opcional -->
-      <div class="form-section">
-        <label class="step-label">5. Algum detalhe especial? (Opcional)</label>
-        <input type="text" id="customDetail" class="custom-input" placeholder="Ex: Gosta de coisas práticas, odeia estampas chamativas, etc.">
-      </div>
-
+      <!-- Botão CTA Principal -->
       <button type="button" class="btn-generate" id="btnGenerate">
         <span>✨ Encontrar o Presente Perfeito</span>
       </button>
+
+      <!-- HUD / Scanner de IA Animado (Exibido durante a busca) -->
+      <div class="ai-scanner-hud" id="aiScannerHud" style="display: none;">
+        <div class="scanner-header">
+          <div class="scanner-badge">
+            <span class="scanner-pulse-dot"></span>
+            <span>Inteligência Artificial em Ação</span>
+          </div>
+          <span class="scanner-percentage" id="scannerPercentage">0%</span>
+        </div>
+        <div class="scanner-progress-track">
+          <div class="scanner-progress-bar" id="scannerProgressBar"></div>
+        </div>
+        <div class="scanner-status" id="scannerStatus">
+          <span class="scanner-status-icon" id="scannerStatusIcon">🔍</span>
+          <span class="scanner-status-text" id="scannerStatusText">Decodificando perfil e preferências...</span>
+        </div>
+      </div>
 
     </div>
 
