@@ -105,6 +105,15 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.hero h2.hero-subtitle {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #d946ef; /* Magenta vívido */
+  margin: 6px auto 10px;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
 .hero p {
   font-size: 1.1rem;
   color: var(--slate-600);
