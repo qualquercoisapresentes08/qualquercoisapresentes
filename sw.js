@@ -1,27 +1,16 @@
-// QCP Service Worker - Habilita modo instalável (PWA) e cache rápido
-const CACHE_NAME = "qcp-v1";
-const ASSETS_TO_CACHE = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/script.js",
-  "/manifest.json"
-];
+// QCP Service Worker - Network First (Sempre busca a versao mais recente da rede)
+const CACHE_NAME = "qcp-v2";
 
 self.addEventListener("install", (e) => {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
-  );
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (e) => {
+  // Limpa todos os caches antigos imediatamente
   e.waitUntil(
     caches.keys().then((keys) =>
       Promise.all(
-        keys.map((key) => {
-          if (key !== CACHE_NAME) return caches.delete(key);
-        })
+        keys.map((key) => caches.delete(key))
       )
     )
   );
@@ -29,14 +18,21 @@ self.addEventListener("activate", (e) => {
 });
 
 self.addEventListener("fetch", (e) => {
-  // Ignora requisições de API para não cachear chamadas ao Gemini
+  // Nao intercepta chamadas de API
   if (e.request.url.includes("/api/")) {
     return;
   }
 
+  // Network First: Sempre busca da rede primeiro; se estiver offline, usa o cache
   e.respondWith(
-    caches.match(e.request).then((cached) => {
-      return cached || fetch(e.request).catch(() => caches.match("/index.html"));
-    })
+    fetch(e.request)
+      .then((response) => {
+        if (response && response.status === 200 && response.type === "basic") {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, responseToCache));
+        }
+        return response;
+      })
+      .catch(() => caches.match(e.request).then((cached) => cached || caches.match("/index.html")))
   );
 });
