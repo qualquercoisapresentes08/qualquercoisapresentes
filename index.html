@@ -12,7 +12,7 @@
   <meta name="apple-mobile-web-app-title" content="QCP Presentes">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="assets/kits/kit-premium.jpg">
-  <link rel="stylesheet" href="style.css?v=2.2">
+  <link rel="stylesheet" href="style.css?v=2.3">
   <style>
     .hero {
       text-align: center;
@@ -422,28 +422,47 @@
         </div>
       </div>
 
-      <!-- Passo 2: Orçamento Máximo -->
-      <div class="form-section">
-        <label class="step-label">2. Até quanto você quer gastar?</label>
-        <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
-          <button type="button" class="option-btn" data-group="budget" data-value="50">
-            Até R$ 50
-          </button>
-          <button type="button" class="option-btn selected" data-group="budget" data-value="150">
-            Até R$ 150
-          </button>
-          <button type="button" class="option-btn" data-group="budget" data-value="300">
-            Até R$ 300
-          </button>
-          <button type="button" class="option-btn" data-group="budget" data-value="1000">
-            Sem Limite
-          </button>
+      <!-- Linha Duo: Passo 2 (Orçamento) e Passo 3 (Faixa Etária) Lado a Lado -->
+      <div class="form-row-duo">
+        <div class="form-section">
+          <label class="step-label">2. Até quanto você quer gastar?</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" data-group="budget" data-value="50">Até R$ 50</button>
+            <button type="button" class="option-btn selected" data-group="budget" data-value="150">Até R$ 150</button>
+            <button type="button" class="option-btn" data-group="budget" data-value="300">Até R$ 300</button>
+            <button type="button" class="option-btn" data-group="budget" data-value="1000">Sem Limite</button>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <label class="step-label">3. Faixa etária da pessoa:</label>
+          <div class="options-grid">
+            <button type="button" class="option-btn" data-group="age" data-value="jovem">Jovem (12-17)</button>
+            <button type="button" class="option-btn selected" data-group="age" data-value="adulto">Adulto (18-35)</button>
+            <button type="button" class="option-btn" data-group="age" data-value="meia-idade">Adulto (36-55)</button>
+            <button type="button" class="option-btn" data-group="age" data-value="senior">Sênior (56+)</button>
+          </div>
         </div>
       </div>
 
-      <!-- Passo 3: Interesses e Hobbies (Multi-seleção) -->
+      <!-- Passo 4: Para quem é o presente? -->
       <div class="form-section">
-        <label class="step-label">3. O que essa pessoa mais curte? (Escolha 1 ou mais)</label>
+        <label class="step-label">4. Para quem é o presente?</label>
+        <div class="options-grid">
+          <button type="button" class="option-btn selected" data-group="relation" data-value="namorado"><span class="opt-icon">❤️</span> Namorado(a)</button>
+          <button type="button" class="option-btn" data-group="relation" data-value="mae"><span class="opt-icon">🌸</span> Mãe</button>
+          <button type="button" class="option-btn" data-group="relation" data-value="pai"><span class="opt-icon">👔</span> Pai</button>
+          <button type="button" class="option-btn" data-group="relation" data-value="amigo"><span class="opt-icon">🤝</span> Amigo(a)</button>
+          <button type="button" class="option-btn" data-group="relation" data-value="cunhado"><span class="opt-icon">🍻</span> Cunhado(a)</button>
+          <button type="button" class="option-btn" data-group="relation" data-value="irmao"><span class="opt-icon">⚡</span> Irmão / Irmã</button>
+          <button type="button" class="option-btn" data-group="relation" data-value="chefe"><span class="opt-icon">💼</span> Chefe / Colega</button>
+          <button type="button" class="option-btn" data-group="relation" data-value="sogro"><span class="opt-icon">🏡</span> Sogro(a)</button>
+        </div>
+      </div>
+
+      <!-- Passo 5: Interesses e Hobbies (Multi-seleção) -->
+      <div class="form-section">
+        <label class="step-label">5. O que essa pessoa mais curte? (Escolha 1 ou mais)</label>
         <div class="tags-cloud">
           <span class="tag-pill" data-tag="churrasco">🥩 Churrasco</span>
           <span class="tag-pill selected" data-tag="cafe">☕ Café Especial</span>
@@ -456,56 +475,6 @@
           <span class="tag-pill" data-tag="decoracao">🌿 Plantas & Casa</span>
           <span class="tag-pill" data-tag="viagem">✈️ Viagens & Aventuras</span>
           <span class="tag-pill" data-tag="cozinha">🍳 Cozinha Gourmet</span>
-        </div>
-      </div>
-
-      <!-- Passo 4: Relação / Parentesco -->
-      <div class="form-section">
-        <label class="step-label">4. Para quem é o presente?</label>
-        <div class="options-grid">
-          <button type="button" class="option-btn selected" data-group="relation" data-value="namorado">
-            <span class="opt-icon">❤️</span> Namorado(a)
-          </button>
-          <button type="button" class="option-btn" data-group="relation" data-value="mae">
-            <span class="opt-icon">🌸</span> Mãe
-          </button>
-          <button type="button" class="option-btn" data-group="relation" data-value="pai">
-            <span class="opt-icon">👔</span> Pai
-          </button>
-          <button type="button" class="option-btn" data-group="relation" data-value="amigo">
-            <span class="opt-icon">🤝</span> Amigo(a)
-          </button>
-          <button type="button" class="option-btn" data-group="relation" data-value="cunhado">
-            <span class="opt-icon">🍻</span> Cunhado(a)
-          </button>
-          <button type="button" class="option-btn" data-group="relation" data-value="irmao">
-            <span class="opt-icon">⚡</span> Irmão / Irmã
-          </button>
-          <button type="button" class="option-btn" data-group="relation" data-value="chefe">
-            <span class="opt-icon">💼</span> Chefe / Colega
-          </button>
-          <button type="button" class="option-btn" data-group="relation" data-value="sogro">
-            <span class="opt-icon">🏡</span> Sogro(a)
-          </button>
-        </div>
-      </div>
-
-      <!-- Passo 5: Faixa Etária -->
-      <div class="form-section">
-        <label class="step-label">5. Qual é a faixa etária da pessoa?</label>
-        <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));">
-          <button type="button" class="option-btn" data-group="age" data-value="jovem">
-            Jovem (12 a 17 anos)
-          </button>
-          <button type="button" class="option-btn selected" data-group="age" data-value="adulto">
-            Adulto (18 a 35 anos)
-          </button>
-          <button type="button" class="option-btn" data-group="age" data-value="meia-idade">
-            Adulto (36 a 55 anos)
-          </button>
-          <button type="button" class="option-btn" data-group="age" data-value="senior">
-            Sênior (56+ anos)
-          </button>
         </div>
       </div>
 
@@ -1019,7 +988,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=2.1"></script>
+  <script src="script.js?v=2.3"></script>
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
