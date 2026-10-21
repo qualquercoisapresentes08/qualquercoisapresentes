@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+  <defs>
+    <linearGradient id="qBoxGrad" x1="8" y1="8" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#4338ca"/>
+    </linearGradient>
+    <linearGradient id="qRibbonGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e0e7ff"/>
+    </linearGradient>
+    <linearGradient id="qTailGrad" x1="36" y1="36" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#d946ef"/>
+    </linearGradient>
+    <filter id="qShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#312e81" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Caixa de Presente que forma o corpo circular do Q -->
+  <rect x="10" y="8" width="40" height="40" rx="12" fill="url(#qBoxGrad)" filter="url(#qShadow)"/>
+
+  <!-- Fita Vertical -->
+  <rect x="27" y="8" width="6" height="40" rx="2" fill="url(#qRibbonGrad)"/>
+
+  <!-- Fita Horizontal -->
+  <rect x="10" y="25" width="40" height="6" rx="2" fill="url(#qRibbonGrad)"/>
+
+  <!-- Laço no Centro -->
+  <path d="M30 25 C26 19, 21 21, 23 26 C25 28, 29 27, 30 28" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M30 25 C34 19, 39 21, 37 26 C35 28, 31 27, 30 28" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="30" cy="27" r="2.5" fill="#ffffff"/>
+
+  <!-- Perninha fluida do Q (Fita de cetim magenta) -->
+  <path d="M38 38 C42 42, 46 48, 52 52 C54 53, 56 53, 57 52" fill="none" stroke="url(#qTailGrad)" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Estrela Mágica de 4 Pontas (Sparkle de IA) -->
+  <path d="M54 48 Q54 53, 59 53 Q54 53, 54 58 Q54 53, 49 53 Q54 53, 54 48 Z" fill="#ffffff" filter="drop-shadow(0 0 3px #d946ef)"/>
+</svg>

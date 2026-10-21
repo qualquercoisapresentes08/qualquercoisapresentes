@@ -75,6 +75,20 @@ body {
   color: var(--slate-900);
 }
 
+.brand-logo strong {
+  background: linear-gradient(135deg, #6366f1, #d946ef);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-logo .brand-icon-svg {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: block;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
+}
+
 .brand-logo .brand-icon {
   font-size: 1.5rem;
 }
