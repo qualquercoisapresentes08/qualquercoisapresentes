@@ -451,6 +451,30 @@
           <input type="text" id="customDetail" class="custom-input" maxlength="250" placeholder="Ex: Disse que queria qualquer coisa, mas adora café especial, livros e coisas práticas..." autocomplete="off">
           <span class="input-hint">💡 Dica: Pode desabafar com suas palavras! Nossa IA decodifica o presente ideal.</span>
         </div>
+
+        <!-- Atalho Rápido Especial de Novembro: Escorpião ♏ -->
+        <div class="scorpio-shortcut-card" id="scorpioShortcutCard">
+          <div class="scorpio-header">
+            <span class="scorpio-badge">♏ ESPECIAL NOVEMBRO</span>
+            <span class="scorpio-subtitle">Aniversariante de Escorpião? Decodifique em 1 clique:</span>
+          </div>
+          <div class="scorpio-btn-group">
+            <button type="button" class="scorpio-pill-btn scorpio-btn-female" id="btnScorpioFemale">
+              <span class="scorpio-btn-icon">👩</span>
+              <div class="scorpio-btn-text">
+                <strong>Para Ela (Mulher)</strong>
+                <small>Intensa · Requinte · Sem Clichês</small>
+              </div>
+            </button>
+            <button type="button" class="scorpio-pill-btn scorpio-btn-male" id="btnScorpioMale">
+              <span class="scorpio-btn-icon">👨</span>
+              <div class="scorpio-btn-text">
+                <strong>Para Ele (Homem)</strong>
+                <small>Vilão Elegante · Café · Vinho · Tech</small>
+              </div>
+            </button>
+          </div>
+        </div>
       </div>
 
       <!-- Linha Duo: Passo 2 (Orçamento) e Passo 3 (Faixa Etária) Lado a Lado -->
@@ -537,9 +561,12 @@
     <!-- SEÇÃO DE RESULTADOS -->
     <section class="results-section" id="resultsSection">
       <div class="results-header">
-        <h2>Ideias Selecionadas para o seu Perfil</h2>
-        <p>Clique para comparar os melhores preços e avaliações diretamente nas lojas:</p>
+        <h2 id="resultsTitle">Ideias Selecionadas para o seu Perfil</h2>
+        <p id="resultsSubtitle">Clique para comparar os melhores preços e avaliações diretamente nas lojas:</p>
       </div>
+
+      <!-- Banner Inteligente de Escorpião (Injetado dinamicamente) -->
+      <div class="scorpio-intel-banner" id="scorpioIntelBanner" style="display: none;"></div>
 
       <div class="cards-grid" id="giftCardsGrid">
         <!-- Injetado dinamicamente via script.js -->

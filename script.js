@@ -258,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupInteractiveSelectors();
   setupCharCounter();
   setupGenerateButton();
+  setupScorpioShortcuts();
   initFeaturedKits();
 });
 
@@ -309,6 +310,118 @@ function setupInteractiveSelectors() {
     btnReset.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+  }
+}
+
+// ATALHO INTELIGENTE: ANIVERSARIANTES DE NOVEMBRO (ESCORPIÃO ♏)
+function setupScorpioShortcuts() {
+  const btnFemale = document.getElementById("btnScorpioFemale");
+  const btnMale = document.getElementById("btnScorpioMale");
+  const customDetailInput = document.getElementById("customDetail");
+  const charCounter = document.getElementById("charCounter");
+  const intelBanner = document.getElementById("scorpioIntelBanner");
+  const resultsSection = document.getElementById("resultsSection");
+
+  if (!btnFemale || !btnMale) return;
+
+  btnFemale.addEventListener("click", () => {
+    aplicarPerfilEscorpiao("mulher");
+  });
+
+  btnMale.addEventListener("click", () => {
+    aplicarPerfilEscorpiao("homem");
+  });
+
+  function aplicarPerfilEscorpiao(genero) {
+    if (genero === "mulher") {
+      customDetailInput.value = "Mulher de Escorpião. Intensa, elegante, odeia presentes clichês, ama café especial, vinho nobre e autocuidado sofisticado.";
+      userSelections.relation = "namorado";
+      userSelections.budget = "300";
+      userSelections.age = "adulto";
+      userSelections.tags = new Set(["cafe", "vinho", "skincare", "decoracao"]);
+
+      if (intelBanner) {
+        intelBanner.style.display = "block";
+        intelBanner.innerHTML = `
+          <div class="scorpio-intel-top">
+            <span class="scorpio-intel-icon">♏</span>
+            <div>
+              <div class="scorpio-intel-title">
+                Perfil Decodificado: Mulher de Escorpião
+                <span class="scorpio-intel-badge">Especial Novembro</span>
+              </div>
+            </div>
+          </div>
+          <div class="scorpio-intel-quote">
+            "Intensa, observadora e alérgica a lembrancinhas de farmácia. Não dê nada com frases de 'gratidão'. Ela valoriza presença, estética refinada e coisas com ar misterioso. Estes 4 kits foram aprovados pelo sexto sentido dela."
+          </div>
+          <div class="scorpio-intel-footer">
+            <span>✨ Curadoria calibrada para não virar inimigo mortal</span>
+            <span>🛒 Entrega rápida garantida na Amazon</span>
+          </div>
+        `;
+      }
+    } else {
+      customDetailInput.value = "Homem de Escorpião. Observador, odeia coisas fofas, se veste como vilão de filme, ama churrasco de chef, vinho encorpado e tech.";
+      userSelections.relation = "namorado";
+      userSelections.budget = "300";
+      userSelections.age = "adulto";
+      userSelections.tags = new Set(["churrasco", "vinho", "cafe", "tech"]);
+
+      if (intelBanner) {
+        intelBanner.style.display = "block";
+        intelBanner.innerHTML = `
+          <div class="scorpio-intel-top">
+            <span class="scorpio-intel-icon">♏</span>
+            <div>
+              <div class="scorpio-intel-title">
+                Perfil Decodificado: Homem de Escorpião
+                <span class="scorpio-intel-badge">Especial Novembro</span>
+              </div>
+            </div>
+          </div>
+          <div class="scorpio-intel-quote">
+            "Não faz aniversário: apenas renova a licença para julgar a humanidade em silêncio. Odeia pelúcias e presentes coloridos. Quer café amargo como a alma dele, carne nobre na brasa e gadgets minimalistas que funcionam."
+          </div>
+          <div class="scorpio-intel-footer">
+            <span>✨ Curadoria digna de um vilão com bom gosto</span>
+            <span>🛒 Entrega rápida garantida na Amazon</span>
+          </div>
+        `;
+      }
+    }
+
+    if (charCounter) {
+      charCounter.textContent = `${customDetailInput.value.length}/250`;
+    }
+
+    // Sincronizar botões de orçamento
+    document.querySelectorAll('[data-group="budget"]').forEach((b) => {
+      if (b.getAttribute("data-value") === userSelections.budget) {
+        b.classList.add("selected");
+      } else {
+        b.classList.remove("selected");
+      }
+    });
+
+    // Sincronizar tags visuais
+    document.querySelectorAll(".tag-pill").forEach((pill) => {
+      const tag = pill.getAttribute("data-tag");
+      if (userSelections.tags.has(tag)) {
+        pill.classList.add("selected");
+      } else {
+        pill.classList.remove("selected");
+      }
+    });
+
+    // Executa a curadoria imediatamente e rola até os resultados
+    generateRecommendationsLocal();
+
+    if (resultsSection) {
+      setTimeout(() => {
+        resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 150);
+    }
   }
 }
 
