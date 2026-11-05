@@ -1044,189 +1044,109 @@ body {
 }
 
 /* ========================================================
-   ESPECIAL NOVEMBRO: ATALHO ESCORPIÃO ♏ (DARK LUXURY)
+   SUGESTÕES RÁPIDAS DE BUSCA (CHIPS DISCRETOS)
 ======================================================== */
-.scorpio-shortcut-card {
-  margin-top: 14px;
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #31103f 100%);
-  border: 1.5px solid #831843;
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  box-shadow: 0 6px 18px rgba(131, 24, 67, 0.18);
-  position: relative;
-  overflow: hidden;
-}
-
-.scorpio-shortcut-card::before {
-  content: "";
-  position: absolute;
-  top: -50px;
-  right: -50px;
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(217, 70, 239, 0.25) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.scorpio-header {
+.quick-suggest-row {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-top: 10px;
 }
 
-.scorpio-badge {
-  background: linear-gradient(135deg, #be123c, #9333ea);
-  color: #ffffff;
-  font-size: 0.72rem;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 999px;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 8px rgba(190, 18, 60, 0.35);
-}
-
-.scorpio-subtitle {
-  font-size: 0.82rem;
-  color: #e2e8f0;
+.quick-suggest-label {
+  font-size: 0.78rem;
   font-weight: 600;
+  color: #64748b;
 }
 
-.scorpio-btn-group {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-@media (max-width: 600px) {
-  .scorpio-btn-group {
-    grid-template-columns: 1fr;
-  }
-}
-
-.scorpio-pill-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 10px;
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.quick-suggest-chip {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 4px 11px;
+  border-radius: 999px;
   cursor: pointer;
-  text-align: left;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+  font-family: inherit;
 }
 
-.scorpio-pill-btn:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: #d946ef;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(217, 70, 239, 0.25);
+.quick-suggest-chip:hover {
+  background: #fdf2f8;
+  border-color: #f472b6;
+  color: #be185d;
+  transform: translateY(-1px);
 }
 
-.scorpio-pill-btn:active {
+.quick-suggest-chip:active {
   transform: translateY(0);
 }
 
-.scorpio-btn-icon {
-  font-size: 1.4rem;
-  flex-shrink: 0;
-}
-
-.scorpio-btn-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.scorpio-btn-text strong {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.scorpio-btn-text small {
-  font-size: 0.72rem;
-  color: #cbd5e1;
-  font-weight: 400;
-}
-
-.scorpio-btn-female:hover strong {
-  color: #f472b6;
-}
-
-.scorpio-btn-male:hover strong {
-  color: #38bdf8;
-}
-
-/* BANNER INTELIGENTE DE ESCORPIÃO (RESULTADOS) */
+/* BANNER DE PERFIL SELECIONADO (RESULTADOS SUTIS) */
 .scorpio-intel-banner {
-  background: linear-gradient(135deg, #0b0f19 0%, #1e112a 50%, #2b0b1e 100%);
-  border: 1.5px solid #d946ef;
-  border-radius: var(--radius-lg);
-  padding: 20px 24px;
-  margin-bottom: 24px;
-  box-shadow: 0 10px 30px rgba(217, 70, 239, 0.2);
-  color: #ffffff;
-  animation: fadeIn 0.4s ease-out;
+  background: #fdf4ff;
+  border: 1px solid #f0abfc;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: #701a75;
+  animation: fadeIn 0.3s ease-out;
 }
 
 .scorpio-intel-top {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 6px;
 }
 
 .scorpio-intel-icon {
-  font-size: 1.8rem;
-  background: rgba(217, 70, 239, 0.15);
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(217, 70, 239, 0.4);
+  font-size: 1.15rem;
 }
 
 .scorpio-intel-title {
-  font-size: 1.05rem;
-  font-weight: 800;
-  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #86198f;
 }
 
 .scorpio-intel-badge {
   background: #be123c;
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 800;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
   padding: 2px 7px;
   border-radius: 999px;
-  margin-left: 8px;
+  margin-left: 6px;
   vertical-align: middle;
 }
 
 .scorpio-intel-quote {
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: #e2e8f0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #4a044e;
   font-style: italic;
-  padding-left: 14px;
-  border-left: 3px solid #d946ef;
-  margin-bottom: 12px;
+  margin: 0 0 6px 0;
+  padding-left: 10px;
+  border-left: 2px solid #d946ef;
 }
 
 .scorpio-intel-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.78rem;
-  color: #a855f7;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: #a21caf;
   font-weight: 600;
-  padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 6px;
+  border-top: 1px solid rgba(240, 171, 252, 0.4);
 }
 
 
