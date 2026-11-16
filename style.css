@@ -1087,6 +1087,41 @@ body {
   transform: translateY(0);
 }
 
+.quick-suggest-link {
+  text-decoration: none;
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4338ca;
+}
+
+.quick-suggest-link:hover {
+  background: #e0e7ff;
+  border-color: #818cf8;
+  color: #3730a3;
+}
+
+.nav-wishlist-link {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #4338ca;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
+  padding: 6px 14px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-wishlist-link:hover {
+  background: #e0e7ff;
+  border-color: #818cf8;
+  transform: translateY(-1px);
+}
+
+.featured-kits-section {
+  display: none;
+}
+
 /* BANNER DE PERFIL SELECIONADO (RESULTADOS SUTIS) */
 .scorpio-intel-banner {
   background: #fdf4ff;
